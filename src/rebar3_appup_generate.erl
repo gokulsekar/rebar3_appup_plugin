@@ -298,7 +298,7 @@ generate_appup_files(TargetDir,
     NewRelEbinDir = filename:join([NewVerPath, "lib",
                                 atom_to_list(App) ++ "-" ++ NewVer, "ebin"]),
 
-    {AddedFiles, DeletedFiles, ChangedFiles} = beam_lib:cmp_dirs(NewRelEbinDir,
+    {AddedFiles, DeletedFiles, ChangedFiles} = beam_lib1:cmp_dirs(NewRelEbinDir,
                                                                  OldRelEbinDir),
     rebar_api:debug("beam files:", []),
     rebar_api:debug("   added: ~p", [AddedFiles]),
@@ -447,7 +447,7 @@ generate_instruction(delete_module, ModDeps, File, _Opts) ->
 %generate_instruction(restarted_application, Application, _, _Opts) ->
 %    {restart_application, Application};
 generate_instruction(upgrade, ModDeps, {File, _}, Opts) ->
-    {ok, {Name, List}} = beam_lib:chunks(File, [attributes, exports]),
+    {ok, {Name, List}} = beam_lib1:chunks(File, [attributes, exports]),
     Behavior = get_behavior(List),
     CodeChange = is_code_change(List),
     Deps = proplists:get_value(Name, ModDeps, []),

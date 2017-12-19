@@ -233,7 +233,7 @@ state_record_info(_Module, RecordName, Forms) ->
 
 %% @spec get_compile_info(atom(),binary() | string()) -> 'no_abstract_code' | binary() | [{atom() | integer(),_} | {atom(),atom() | byte(),integer()} | {non_neg_integer(),atom() | tuple(),atom(),byte()}] | {atom(),[any()]}.
 get_compile_info(Module, Beam) ->
-    case beam_lib:chunks(Beam, [compile_info]) of
+    case beam_lib1:chunks(Beam, [compile_info]) of
         {ok, {Module, [{compile_info, Compile}]}} ->
             Compile;
         _ -> []
